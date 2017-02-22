@@ -13,7 +13,7 @@ class Location(models.Model):
 
 class Project(models.Model):
     name = models.CharField(max_length = 64)
-    location = models.ForeignKey(Location, on_delete=models.DO_NOTHING)
+    location = models.ForeignKey(Location, related_name='projects', on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return self.name
@@ -26,7 +26,7 @@ class RealProperty(models.Model):
     
     description = models.CharField(max_length = 128, blank=True)
     category = models.IntegerField(choices=CATEGORIES, default=CATEGORIES.house_and_lot)
-    project = models.ForeignKey(Project, on_delete = models.CASCADE)
+    project = models.ForeignKey(Project, related_name='real_properties', on_delete=models.CASCADE)
     lowest_price = models.PositiveIntegerField()
     highest_price = models.PositiveIntegerField()
     lot_area = models.PositiveIntegerField()
@@ -41,7 +41,7 @@ class Unit(models.Model):
         (3, 'sold', _('Sold'))
         )
     
-    real_property = models.ForeignKey(RealProperty, on_delete=models.CASCADE)
+    real_property = models.ForeignKey(RealProperty, related_name='units', on_delete=models.CASCADE)
     status = models.IntegerField(choices=STATUS, default=STATUS.available)
     last_updated = MonitorField(monitor='status')
 
