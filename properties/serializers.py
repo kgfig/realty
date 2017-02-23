@@ -8,19 +8,16 @@ class UnitSerializer(serializers.ModelSerializer):
         fields = ('id', 'status')
 
 class RealPropertySerializer(serializers.ModelSerializer):
-    units = UnitSerializer(many=True, read_only=True)
     class Meta:
         model = RealProperty
-        fields = ('id', 'description', 'category', 'lowest_price', 'highest_price', 'lot_area', 'units')
+        fields = ('id', 'name', 'description', 'category', 'lowest_price', 'highest_price', 'lot_area', 'floor_area')
         depth = 1
     
 
 class ProjectSerializer(serializers.ModelSerializer):
-    real_properties = RealPropertySerializer(many=True, read_only=True)
-    
     class Meta:
         model = Project
-        fields = ('id', 'name', 'location', 'real_properties')
+        fields = ('id', 'name', 'location')
         depth = 1
 
 

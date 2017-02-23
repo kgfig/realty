@@ -30,6 +30,7 @@ class RealProperty(models.Model):
     lowest_price = models.PositiveIntegerField()
     highest_price = models.PositiveIntegerField()
     lot_area = models.PositiveIntegerField()
+    floor_area = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return '%s (%s) - %d sqm for PHP%d' %(self.description, RealProperty.CATEGORIES[self.category], self.lot_area, self.lowest_price)

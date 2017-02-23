@@ -67,8 +67,7 @@ class ProjectsAPITestCase(TestCase):
                     'id': 1,
                     'municipality': 'Silang',
                     'province': 'Cavite'
-            },
-            'real_properties': []
+            }
         }
         self.assertEqual(response.data, content)        
 
@@ -81,21 +80,25 @@ class PropertyAPITestCase(TestCase):
         grove.save()
 
         magnolia = RealProperty(
-            description='Magnolia (3B Bungalow with Loft)',
+            name='Magnolia',
+            description='3B Bungalow with Loft',
             category=RealProperty.CATEGORIES.house_and_lot,
             lowest_price=1900000,
             highest_price=2400000,
             lot_area=90,
+            floor_area=61,
             project=grove
         )
         magnolia.save()
 
         vanilla = RealProperty(
-            description='Vanilla (3B 2-storey house and lot)',
+            name='Vanilla',
+            description='3B 2-storey house and lot',
             category=RealProperty.CATEGORIES.house_and_lot,
             lowest_price=2100000,
             highest_price=2500000,
             lot_area=80,
+            floor_area=58,
             project=grove
         )
         vanilla.save()
@@ -117,16 +120,12 @@ class PropertyAPITestCase(TestCase):
         response = self.client.get(self.detail_url)
         content = {
             'id': 1,
-            'description': 'Magnolia (3B Bungalow with Loft)',
+            'name': 'Magnolia',
+            'description': '3B Bungalow with Loft',
             'category': RealProperty.CATEGORIES.house_and_lot,
             'lowest_price': 1900000,
             'highest_price': 2400000,
             'lot_area': 90,
-            'units': [
-                 {
-                     'id': 1,
-                     'status': Unit.STATUS.reserved
-                 }   
-            ]
+            'floor_area': 61
         }
         self.assertEqual(response.data, content)

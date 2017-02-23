@@ -41,7 +41,8 @@ class RealPropertyTestCase(TestCase):
             project=project,
             lowest_price=1900000,
             highest_price=2400000,
-            lot_area=90
+            lot_area=90,
+            floor_area=61
         )
         self.hl_property.save()
 
@@ -66,7 +67,8 @@ class UnitTestCase(TestCase):
             project=project,
             lowest_price=1900000,
             highest_price=2400000,
-            lot_area=90
+            lot_area=90,
+            floor_area=61
         )
         hl_property.save()
 
