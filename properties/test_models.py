@@ -51,7 +51,6 @@ class RealPropertyTestCase(TestCase):
         real_property.save()
 
         saved_property = RealProperty.objects.first()
-        print(saved_property)
         self.assertEqual(saved_property, real_property)
 
 class UnitTestCase(TestCase):
@@ -84,8 +83,6 @@ class UnitTestCase(TestCase):
         saved_units_count = Unit.objects.count()
         reserved_unit = Unit.objects.get(status=Unit.STATUS.reserved)
         available_unit = Unit.objects.get(status=Unit.STATUS.available)
-        print(reserved_unit)
-        print(other_unit)
         self.assertEqual(saved_units_count, 2)
         self.assertEqual(reserved_unit.id, unit.id)
         self.assertEqual(available_unit.id, other_unit.id)

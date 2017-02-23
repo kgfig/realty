@@ -5,13 +5,13 @@ from .models import Location, Project, RealProperty, Unit
 class UnitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Unit
-        fields = ('status', 'last_update')
+        fields = ('id', 'status')
 
 class RealPropertySerializer(serializers.ModelSerializer):
     units = UnitSerializer(many=True, read_only=True)
     class Meta:
         model = RealProperty
-        fields = ('description', 'category', 'lowest_price', 'highest_price', 'lot_area')
+        fields = ('id', 'description', 'category', 'lowest_price', 'highest_price', 'lot_area', 'units')
         depth = 1
     
 
@@ -20,7 +20,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Project
-        fields = ('name', 'location')
+        fields = ('id', 'name', 'location', 'real_properties')
         depth = 1
 
 
@@ -29,6 +29,6 @@ class LocationSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Location
-        fields = ('municipality', 'province')
+        fields = ('id', 'municipality', 'province', 'projects')
         depth = 1
 
