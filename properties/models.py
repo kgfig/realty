@@ -20,12 +20,12 @@ class Project(models.Model):
 
 class RealProperty(models.Model):
     CATEGORIES = Choices(
-            (1, 'house_and_lot', _('House and Lot')),
-            (2, 'lot_only', _('Lot Only'))
+            ('house_and_lot', _('House and Lot')),
+            ('lot_only', _('Lot Only'))
         )
-    
+    name = models.CharField(max_length = 64, blank=True)
     description = models.CharField(max_length = 128, blank=True)
-    category = models.IntegerField(choices=CATEGORIES, default=CATEGORIES.house_and_lot)
+    category = models.CharField(max_length=32, choices=CATEGORIES, default=CATEGORIES.house_and_lot)
     project = models.ForeignKey(Project, related_name='real_properties', on_delete=models.CASCADE)
     lowest_price = models.PositiveIntegerField()
     highest_price = models.PositiveIntegerField()
@@ -36,13 +36,13 @@ class RealProperty(models.Model):
 
 class Unit(models.Model):
     STATUS = Choices(
-        (1, 'available', _('Available')),
-        (2, 'reserved', _('Reserved')),
-        (3, 'sold', _('Sold'))
+        ('available', _('Available')),
+        ('reserved', _('Reserved')),
+        ('sold', _('Sold'))
         )
     
     real_property = models.ForeignKey(RealProperty, related_name='units', on_delete=models.CASCADE)
-    status = models.IntegerField(choices=STATUS, default=STATUS.available)
+    status = models.CharField(max_length=16, choices=STATUS, default=STATUS.available)
     last_updated = MonitorField(monitor='status')
 
     def __str__(self):
